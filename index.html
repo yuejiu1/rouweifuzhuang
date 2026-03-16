@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>柔玮服装 · 匠心加工</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, system-ui, -apple-system, 'Helvetica Neue', sans-serif;
+        }
+
+        body {
+            background: #f8f9fa;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 2rem 1.5rem;
+        }
+
+        /* 主卡片容器 */
+        .company-card {
+            max-width: 1200px;
+            width: 100%;
+            background: white;
+            border-radius: 2rem;
+            box-shadow: 0 20px 40px -10px rgba(0, 20, 30, 0.15), 0 8px 20px rgba(0,0,0,0.05);
+            overflow: hidden;
+            padding: 2.5rem 2rem;
+            transition: all 0.3s ease;
+        }
+
+        /* 大标题 */
+        .hero-title {
+            font-size: 2.8rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+            color: #1e2b3c;
+            margin-bottom: 0.5rem;
+            border-left: 8px solid #c6a87f;
+            padding-left: 1.8rem;
+        }
+
+        /* 副标题 / 点睛语 */
+        .tagline {
+            font-size: 1.2rem;
+            color: #5a6b7a;
+            margin: 0.5rem 0 1.8rem 2.2rem;
+            font-weight: 300;
+            font-style: italic;
+            position: relative;
+        }
+        .tagline::before {
+            content: "——";
+            color: #c6a87f;
+            font-style: normal;
+            margin-right: 0.6rem;
+            font-weight: 300;
+        }
+
+        /* 联系信息条 */
+        .info-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem 3rem;
+            background: #f1f4f7;
+            border-radius: 3rem;
+            padding: 1.5rem 2.2rem;
+            margin: 2rem 0 2.5rem 0;
+            justify-content: flex-start;
+            align-items: center;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            color: #1e3a4b;
+            font-size: 1.1rem;
+        }
+
+        .info-item i { 
+            font-style: normal;
+            font-weight: 500;
+            background: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: #c6a87f;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.03);
+            font-size: 1.2rem;
+        }
+
+        .info-item span {
+            font-weight: 400;
+        }
+        .info-item strong {
+            font-weight: 600;
+            margin-left: 0.3rem;
+            color: #1e2b3c;
+        }
+
+        .info-item a {
+            color: #1e2b3c;
+            text-decoration: none;
+            border-bottom: 1px dotted #9aaebf;
+        }
+        .info-item a:hover {
+            color: #c6a87f;
+            border-bottom-color: #c6a87f;
+        }
+
+        /* 公司简介 / 生动文案 */
+        .description {
+            background: linear-gradient(to right, #ffffff, #fafbfc);
+            padding: 1.8rem 2rem;
+            border-radius: 2rem;
+            margin: 1.8rem 0 2.5rem 0;
+            border: 1px solid #e9edf2;
+            font-size: 1.2rem;
+            line-height: 1.6;
+            color: #2f3e4e;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+        }
+        .description p {
+            margin-bottom: 0.8rem;
+        }
+        .description .emph {
+            font-weight: 500;
+            color: #b48b5a;
+        }
+
+        /* 相册区域标题 */
+        .gallery-title {
+            font-size: 1.8rem;
+            font-weight: 450;
+            margin: 2.8rem 0 1.8rem 0;
+            color: #1e2b3c;
+            display: flex;
+            align-items: center;
+        }
+        .gallery-title span {
+            background: #c6a87f;
+            width: 6px;
+            height: 32px;
+            border-radius: 6px;
+            display: inline-block;
+            margin-right: 1rem;
+        }
+
+        /* 三图网格 / 小相册 */
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.8rem;
+            margin-top: 1rem;
+        }
+
+        .photo-card {
+            background: white;
+            border-radius: 1.5rem;
+            overflow: hidden;
+            box-shadow: 0 12px 24px -12px rgba(0, 32, 64, 0.2);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            border: 1px solid #eaedf0;
+        }
+
+        .photo-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 24px 30px -14px rgba(82, 67, 45, 0.25);
+        }
+
+        .photo-img {
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            background-color: #d9e0e6;  /* 占位底色 */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            color: #3d4f5e;
+            font-weight: 350;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            /* 下面用内联样式设置不同的背景图占位（unsplash 随机风格，便于演示） */
+        }
+
+        /* 为每张卡片设置不同的占位图片（来自 picsum，确保风格不同） */
+        .photo-card:nth-child(1) .photo-img {
+            background-image: url('https://picsum.photos/id/1015/400/300');  /* 山水 */
+        }
+        .photo-card:nth-child(2) .photo-img {
+            background-image: url('https://picsum.photos/id/1043/400/300');  /* 人像工作 */
+        }
+        .photo-card:nth-child(3) .photo-img {
+            background-image: url('https://picsum.photos/id/106/400/300');   /* 细节特写 */
+        }
+
+        /* 当图片加载失败或占位说明，保留文字提示（但一般 picsum 可用） */
+        .photo-img::after {
+            
+            background: rgba(255,255,255,0.7);
+            padding: 0.4rem 1rem;
+            border-radius: 40px;
+            color: #2e3b4b;
+            font-size: 0.85rem;
+            font-weight: 400;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .photo-caption {
+            padding: 1rem 1.2rem 1.3rem 1.2rem;
+            background: white;
+        }
+
+        .photo-caption h3 {
+            font-size: 1.2rem;
+            font-weight: 550;
+            color: #1e2b3c;
+            margin-bottom: 0.3rem;
+        }
+
+        .photo-caption p {
+            color: #6a7b8a;
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+
+        /* 页脚装饰 */
+        .footer-note {
+            margin-top: 3.5rem;
+            text-align: center;
+            color: #9aabba;
+            font-size: 0.9rem;
+            border-top: 1px dashed #d6dee6;
+            padding-top: 2rem;
+        }
+        .footer-note a {
+            color: #c6a87f;
+            text-decoration: none;
+        }
+
+        /* 响应式 */
+        @media (max-width: 850px) {
+            .hero-title { font-size: 2.2rem; }
+            .photo-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .info-grid { flex-direction: column; align-items: flex-start; gap: 1rem; }
+            .company-card { padding: 1.8rem; }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title { font-size: 1.8rem; padding-left: 1rem; }
+            .tagline { margin-left: 1.2rem; }
+            .info-item { flex-wrap: wrap; }
+        }
+
+        /* 提示替换照片的注释（仅在开发时显示，实际可隐藏） */
+        .photo-note {
+            background: #fcf6ea;
+            border-radius: 2rem;
+            padding: 0.8rem 1.5rem;
+            margin-top: 1rem;
+            font-size: 0.95rem;
+            color: #7d613c;
+            border: 1px solid #eedabc;
+            display: inline-block;
+        }
+        .photo-note i { font-style: normal; margin-right: 0.3rem; }
+
+    </style>
+</head>
+<body>
+    <div class="company-card">
+        <!-- 大标题：公司名 -->
+        <h1 class="hero-title">石家庄柔玮服装服饰有限公司</h1>
+        <div class="tagline">一针一线 · 匠心缝制 · 品质交付</div>
+
+        <!-- 地址、负责人、电话 信息卡片 -->
+        <div class="info-grid">
+            <div class="info-item">
+                <i>📍</i>
+                <span><strong>地址</strong> 石家庄市鹿泉区永壁</span>
+            </div>
+            <div class="info-item">
+                <i>👩‍💼</i>
+                <span><strong>负责人</strong> 范海玲</span>
+            </div>
+            <div class="info-item">
+                <i>📞</i>
+                <span><strong>电话</strong> <a href="tel:15373007068">153-7300-7068</a></span>
+            </div>
+        </div>
+
+        <!-- 生动文案 描述服装加工 -->
+        <div class="description">
+            <p>✨ <span class="emph">柔玮服装</span> —— 扎根石家庄鹿泉区，十余年专注各类服装加工。从裁剪到缝制，每一道工序都倾注着<span class="emph">工匠之心</span>。</p>
+            <p>我们珍视每一块面料，用细腻的针脚讲述服装的故事。无论是<span class="emph">工装、时装还是定制款式</span>，柔玮都以严谨的态度、准时的交付，赢得客户的信赖。</p>
+            <p>👕 来样加工 · 批量生产 · 工艺精细 · 沟通顺畅</p>
+        </div>
+
+        <!-- 员工工作照小相册 标题 -->
+        <div class="gallery-title">
+            <span></span> 员工工作瞬间 · 真实记录
+        </div>
+
+        <!-- 三张照片网格（实际图片已用占位图，可替换为自己的图片链接） -->
+        <div class="photo-grid">
+            <!-- 第一张照片 -->
+<div class="photo-img" style="background-image: url('images/worker1.jpg');" ...></div>
+<!-- 第二张照片 -->
+<div class="photo-img" style="background-image: url('images/worker2.jpg');" ...></div>
+<!-- 第三张照片 -->
+<div class="photo-img" style="background-image: url('images/worker3.jpg');" ...></div>
+        </div>
+
+        <!-- 一个小提示：如何替换成自己的真实照片（此区域仅作说明，实际可删除） -->
+        <div class="photo-note">
+            ⚡ 如有业务需要，请您通过电话联系我 。<strong></strong><br>
+            👉 15373007068
+        </div>
+
+        <!-- 底部装饰 -->
+        <div class="footer-note">
+            <span>石家庄柔玮服装服饰有限公司 · 专注服装加工 · 欢迎洽谈合作</span><br>
+            <span style="font-size:0.8rem;">地址：石家庄市鹿泉区永壁 | 负责人：范海玲 | 电话：15373007068</span>
+        </div>
+    </div>
+
+    <!-- 可选：确保图片显示备用说明（但上面已经内置样式，不需要额外） -->
+</body>
+</html>
